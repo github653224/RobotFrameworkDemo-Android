@@ -5,6 +5,7 @@ Suite Setup  Open Application  http://localhost:4723/wd/hub
              ...  deviceName=${deviceName}
              ...  udid=${deviceId}
              ...  app=${appBinary}
+             ...  automationName=uiautomator2
 Suite Teardown  Close Application
 
 *** Test Cases ***
@@ -16,4 +17,11 @@ Move To Second Screen When Username And Password Are Not Empty
     Input Text  txt_password  secret123
     Tap  btn_login
     Wait Until Page Contains  Hello World!  timeout=2
+
+Show Login Failed If Username Or Password IS Empty
+    Go Back
+    Clear Text  txt_username
+    Clear Text  txt_password
+    Tap  btn_login
+    Wait Until Page Contains Element  xpath=//*[@text="Login Failed!"]
 
